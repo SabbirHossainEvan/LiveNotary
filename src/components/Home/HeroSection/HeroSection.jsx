@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CheckCircle, Zap, Clock } from 'lucide-react'; 
+import { CheckCircle, Zap, Clock } from 'lucide-react';
 
 const HeroSection = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -22,7 +22,7 @@ const HeroSection = () => {
     ];
 
     return (
-        <section className="bg-gray-100 py-28 sm:py-32 overflow-hidden">
+        <section className="[background:linear-gradient(to_bottom,_#FFFFFF_0%,_#EFF6FF_100%)] py-28 sm:py-32 overflow-hidden">
             <div
                 className={`
                     max-w-5xl mx-auto px-4 text-center transition-opacity duration-1000 ease-in-out
@@ -38,7 +38,7 @@ const HeroSection = () => {
                     Fast. Secure. Fully Compliant. No downloads needed.
                 </p>
 
-                <div className="mt-8">
+                <div className="mt-15">
                     <button className="inline-flex items-center justify-center px-10 py-3 border border-transparent text-base font-medium rounded-lg shadow-lg 
                         text-white bg-blue-600 hover:bg-blue-700 
                         transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">
@@ -46,18 +46,20 @@ const HeroSection = () => {
                     </button>
                 </div>
 
-                <div className="mt-12 flex justify-center space-x-8 sm:space-x-12">
+                <div className="mt-15 flex  justify-center space-x-8 md:space-x-12">
                     {benefits.map((benefit, index) => (
-                        <div key={index} className="flex flex-col items-center">
-                            <benefit.icon size={24} className={`${benefit.color} mb-1`} />
-                            <p className="text-sm font-medium text-gray-700 whitespace-nowrap">
+                        <div key={index} className="flex items-center">
+                            <div>
+                                <benefit.icon size={24} className={`${benefit.color} mb-1`} />
+                            </div>
+                            <p className="text-sm font-medium text-gray-700 whitespace-nowrap ml-2">
                                 {benefit.text}
                             </p>
                         </div>
                     ))}
                 </div>
             </div>
-            
+
             <button className="fixed bottom-6 right-6 p-4 rounded-full bg-blue-600 text-white shadow-xl 
                 transition duration-300 hover:bg-blue-700 
                 animate-pulse hover:animate-none">

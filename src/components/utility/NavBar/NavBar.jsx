@@ -193,7 +193,7 @@ const Navbar = () => {
 
     return (
         <header className={`
-      fixed top-0 left-0 w-full z-50 transition-all duration-300 
+      fixed top-0 left-0 w-full bg-white z-50 transition-all shadow-lg duration-300 
       ${isScrolled ? 'shadow-lg bg-white/95 backdrop-blur-sm' : 'bg-white'}
     `}>
             <nav className="px-6 md:px-18 lg:px-20">
@@ -206,7 +206,7 @@ const Navbar = () => {
                             alt="UseHistory Logo"
                             width={82}
                             height={82}
-                            className="mt-1"
+                            className="mt-1 mb-1"
                         />
 
                     </Link>
