@@ -1,11 +1,9 @@
 'use client';
 
-// REMOVED: import navImage from '/NavLogo.png'; 
-
 import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image'; // <-- NEW: Import the Next.js Image component
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 
 
@@ -26,7 +24,6 @@ const Navbar = () => {
         setIsOpen(!isOpen);
     };
 
-    // useEffect to handle the scroll event for dynamic styling
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10);
@@ -81,7 +78,6 @@ const Navbar = () => {
                 `}
                             >
                                 {item.name}
-                                {/* Active Link Underline Animation */}
                                 <span className={`
                   absolute bottom-0 left-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out
                   ${isActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'}
@@ -92,13 +88,11 @@ const Navbar = () => {
 
                     {/* Get Started Button */}
                     <div className="hidden md:block">
-                        <button className="px-5 py-2 bg-blue-600 text-white font-medium rounded-full 
-              hover:bg-blue-700 transition duration-300 transform hover:scale-105 shadow-md">
+                        <button className="px-5 py-2 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105 shadow-md">
                             Get Started
                         </button>
                     </div>
 
-                    {/* Mobile Menu Button (Hamburger/X Icon) */}
                     <div className="md:hidden flex items-center">
                         <button
                             onClick={toggleMenu}
@@ -110,7 +104,6 @@ const Navbar = () => {
                 </div>
             </nav>
 
-            {/* Mobile Menu (Dynamic/Animated) */}
             <div
                 className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out 
           ${isOpen ? 'max-h-screen opacity-100 py-2' : 'max-h-0 opacity-0'}
@@ -121,7 +114,7 @@ const Navbar = () => {
                         <Link
                             key={item.name}
                             href={item.href}
-                            onClick={() => setIsOpen(false)} // Close menu on click
+                            onClick={() => setIsOpen(false)}
                             className={`
                 block px-3 py-2 rounded-md text-base font-medium transition duration-300
                 ${isActive(item.href)
@@ -133,8 +126,8 @@ const Navbar = () => {
                             {item.name}
                         </Link>
                     ))}
-                    <button className="mt-3 w-full px-5 py-2 bg-blue-600 text-white font-medium rounded-lg 
-            hover:bg-blue-700 transition duration-300 shadow-md">
+                    <button className={`mt-3 w-full px-5 py-2 bg-blue-600 text-white font-medium rounded-lg 
+            hover:bg-blue-700 transition duration-300 shadow-md`}>
                         Get Started
                     </button>
                 </div>
@@ -144,3 +137,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

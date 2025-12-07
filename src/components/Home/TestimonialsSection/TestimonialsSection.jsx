@@ -11,7 +11,6 @@ const testimonialData = [
     quote: "Incredibly fast and professional. I was able to get my documents notarized in minutes, serviced in under ten minutes. No more driving to the offices and waiting in lines.",
     name: "Sarah Johnson",
     title: "Real Estate Agent",
-    company: "Title",
   },
   {
     id: 2,
@@ -19,15 +18,13 @@ const testimonialData = [
     quote: "As incredibly fast and professional, my documents hassle serviced in notarizations, while more driving to me use. No deixesation, the recommend it to easy to all wis lines.",
     name: "Sarah Johnson",
     title: "Small Business Owner",
-    company: "Title",
   },
   {
     id: 3,
     rating: 5,
-    quote: "I reeredibly fast and professional my documents in aus serviced in notarizations. This more driving to ofie estics. No mos, to the recommend it to all ticn in all wis lines.",
+    quote: "The notaries are professional and the platform is so easy to use. I recommend it to all my clients who need remote notarization.",
     name: "Emily Rodriguez",
     title: "Legal Assistant",
-    company: "Lritel Stov-9-8-Boua",
   },
 ];
 

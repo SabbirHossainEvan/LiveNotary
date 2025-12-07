@@ -1,5 +1,7 @@
 
 import AffiliateSection from "@/components/Home/AffiliateSection/AffiliateSection";
+import ContactUsSection from "@/components/Home/ContactUsSection/ContactUsSection";
+import FAQSection from "@/components/Home/FAQSection/FAQSection";
 import HeroSection from "@/components/Home/HeroSection/HeroSection";
 import HowItWorks from "@/components/Home/HowItWorks/HowItWorks";
 import TestimonialsSection from "@/components/Home/TestimonialsSection/TestimonialsSection";
@@ -12,6 +14,8 @@ export default function Home() {
       <HowItWorks></HowItWorks>
       <AffiliateSection></AffiliateSection>
       <TestimonialsSection></TestimonialsSection>
+      <FAQSection></FAQSection>
+      <ContactUsSection></ContactUsSection>
     </div>
   );
 }

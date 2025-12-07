@@ -39,17 +39,17 @@ const HeroSection = () => {
                 </p>
 
                 <div className="mt-15">
-                    <button className="inline-flex items-center justify-center px-10 py-3 border border-transparent text-base font-medium rounded-lg shadow-lg 
+                    <button className={`inline-flex items-center justify-center px-10 py-3 border border-transparent text-base font-medium rounded-lg shadow-lg 
                         text-white bg-blue-600 hover:bg-blue-700 
-                        transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300`}>
                         Start Notarization
                     </button>
                 </div>
 
-                <div className="mt-15 flex  justify-center space-x-8 md:space-x-12">
+                <div className="mt-15 flex  justify-center space-x-3 md:space-x-12">
                     {benefits.map((benefit, index) => (
-                        <div key={index} className="flex items-center">
-                            <div>
+                        <div key={index} className="block md:flex items-center">
+                            <div className='ml-10 md:mb-0 mb-2 md:ml-0'>
                                 <benefit.icon size={24} className={`${benefit.color} mb-1`} />
                             </div>
                             <p className="text-sm font-medium text-gray-700 whitespace-nowrap ml-2">
@@ -60,7 +60,7 @@ const HeroSection = () => {
                 </div>
             </div>
 
-            <button className="fixed bottom-6 right-6 p-4 rounded-full bg-blue-600 text-white shadow-xl 
+            {/* <button className="fixed bottom-6 right-6 p-4 rounded-full bg-blue-600 text-white shadow-xl 
                 transition duration-300 hover:bg-blue-700 
                 animate-pulse hover:animate-none">
                 <span className="flex items-center justify-center transform rotate-90">
@@ -68,7 +68,7 @@ const HeroSection = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                     </svg>
                 </span>
-            </button>
+            </button> */}
         </section>
     );
 };
