@@ -1,4 +1,4 @@
-// components/HowItWorks.jsx
+
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
@@ -8,19 +8,19 @@ const steps = [
         id: 1,
         title: 'Fill a Short Request Form',
         description: 'Provide basic details about your document and signers. Takes less than 2 minutes.',
-        color: 'bg-blue-100/70 text-blue-800 ring-blue-500/50',
+        color: 'bg-blue-100/70 text-blue-800 ring-blue-100/70',
     },
     {
         id: 2,
         title: 'Get Matched with a Notary',
         description: 'A verified notary accepts your request and sends you a secure session link.',
-        color: 'bg-green-100/70 text-green-800 ring-green-500/50',
+        color: 'bg-green-100/70 text-green-800 ring-green-100/70',
     },
     {
         id: 3,
         title: 'Complete Notarization Online',
         description: 'Join the secure video session and get your documents notarized instantly.',
-        color: 'bg-purple-100/70 text-purple-800 ring-purple-500/50',
+        color: 'bg-purple-100/70 text-purple-800 ring-purple-100/70',
     },
 ];
 
@@ -86,20 +86,18 @@ const HowItWorks = () => {
                 });
             },
             {
-                root: null, // Viewport as the root
+                root: null,
                 rootMargin: '0px',
-                threshold: 0.2, // Trigger when 20% of the element is visible
+                threshold: 0.2, 
             }
         );
 
-        // Observe all elements that have been assigned a ref
         stepRefs.current.forEach((element) => {
             if (element) {
                 observer.observe(element);
             }
         });
 
-        // Cleanup function
         return () => {
             stepRefs.current.forEach(element => {
                 if (element) {
@@ -107,15 +105,13 @@ const HowItWorks = () => {
                 }
             });
         };
-    // The dependency array ensures the effect runs when the component mounts 
-    // and correctly observes the elements.
     }, [stepRefs.current.length]); 
 
     return (
         <section className="bg-white py-20 sm:py-28">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Title */}
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-16">
+                <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-16">
                     How It Works
                 </h2>
 
@@ -126,8 +122,8 @@ const HowItWorks = () => {
                             key={step.id}
                             step={step}
                             isVisible={visibleSteps[index]}
-                            delay={index * 200} // Staggered delay: 0ms, 200ms, 400ms
-                            refCallback={setStepRef} // Pass the ref callback for dynamic ref assignment
+                            delay={index * 200} 
+                            refCallback={setStepRef} 
                         />
                     ))}
                 </div>
