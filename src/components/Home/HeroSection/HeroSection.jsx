@@ -22,7 +22,7 @@ const HeroSection = () => {
     ];
 
     return (
-        <section className="bg-gray-100 pt-28 sm:py-32 overflow-hidden">
+        <section className="bg-gray-100 py-28 sm:py-32 overflow-hidden">
             <div
                 className={`
                     max-w-5xl mx-auto px-4 text-center transition-opacity duration-1000 ease-in-out
@@ -58,7 +58,7 @@ const HeroSection = () => {
                 </div>
             </div>
             
-            <button className="fixed bottom-6 right-6 p-4 mt-10 rounded-full bg-blue-600 text-white shadow-xl 
+            <button className="fixed bottom-6 right-6 p-4 rounded-full bg-blue-600 text-white shadow-xl 
                 transition duration-300 hover:bg-blue-700 
                 animate-pulse hover:animate-none">
                 <span className="flex items-center justify-center transform rotate-90">
