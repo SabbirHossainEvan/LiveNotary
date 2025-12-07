@@ -35,7 +35,7 @@ const features = [
 ];
 
 // Individual Card Component
-const FeatureCard = ({ feature, index, isAnimated }) => {
+const FeatureCard = ({ feature, index,  }) => {
 
   const delayClass = `delay-${index * 300}`; 
 
@@ -44,13 +44,8 @@ const FeatureCard = ({ feature, index, isAnimated }) => {
       className={`
         flex flex-col items-center p-6 m-4 w-full md:w-1/3 min-h-[250px]
         bg-white/10 backdrop-blur-sm rounded-xl
-        transform transition-all duration-700 ease-out
-        ${delayClass}
+        transform transition-all duration-700 ease-out -ml-[3px]
         
-        ${isAnimated 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-10'
-        }
       `}
     >
       <div className="p-4 rounded-full bg-white/10 backdrop-blur-sm  mb-4">
@@ -69,12 +64,6 @@ const FeatureCard = ({ feature, index, isAnimated }) => {
 // Main Section Component
 const AffiliateSection = () => {
 
-  const [isAnimated, setIsAnimated] = useState(false);
-
-  useEffect(() => {
-
-    setIsAnimated(true);
-  }, []); 
 
   return (
     <section 
@@ -84,7 +73,7 @@ const AffiliateSection = () => {
       <div 
         className={`
           text-center mb-12 transition-opacity duration-1000 ease-out
-          ${isAnimated ? 'opacity-100' : 'opacity-0'}
+         
         `}
       >
         <h2 className="text-4xl sm:text-5xl font-bold mb-3">
@@ -102,7 +91,7 @@ const AffiliateSection = () => {
             key={index} 
             feature={feature} 
             index={index} 
-            isAnimated={isAnimated}
+            
           />
         ))}
       </div>
@@ -112,7 +101,7 @@ const AffiliateSection = () => {
         // Animated button
         className={`
           mt-12 transition-all duration-1000 ease-out delay-900
-          ${isAnimated ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}
+          
         `}
       >
         <button className="px-8 py-3 text-lg font-semibold text-blue-800 bg-white rounded-full hover:bg-gray-200 transition duration-300 shadow-xl">
