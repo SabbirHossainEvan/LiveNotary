@@ -194,7 +194,7 @@ const Navbar = () => {
     return (
         <header className={`
       fixed top-0 left-0 w-full bg-white z-50 transition-all shadow-lg duration-300 
-      ${isScrolled ? 'shadow-lg bg-white/95 backdrop-blur-sm' : 'bg-white'}
+      ${isScrolled ? 'shadow-lg bg-white backdrop-blur-sm' : 'bg-white'}
     `}>
             <nav className="px-6 md:px-18 lg:px-20">
                 <div className="flex justify-between items-center ">
