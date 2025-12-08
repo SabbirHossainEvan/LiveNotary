@@ -25,7 +25,7 @@ const ContactUsSection = () => {
 
 
   return (
-    <section className="py-20 sm:py-28 bg-white">
+    <section id="contact-us" className="py-20 sm:py-28 bg-white">
       <div 
         className={`
           max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 transition-opacity duration-1000 ease-in-out transform

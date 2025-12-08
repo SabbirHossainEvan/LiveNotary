@@ -55,8 +55,8 @@ const FAQSection = () => {
   const AccordionItem = ({ item }) => {
     const isOpen = openId === item.id;
     return (
-      <div 
-        className="bg-white p-5 rounded-lg  transition-all duration-300 cursor-pointer"
+      <div  
+        className="bg-white p-5 rounded-lg transition-all duration-300 cursor-pointer"
         onClick={() => toggleFAQ(item.id)}
       >
         {/* Question Row */}
@@ -85,14 +85,14 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="py-10 sm:py-10 bg-[#F9FAFB]">
+    <section id='faqs-section' className=" sm:py-10 bg-[#F9FAFB]">
       <div 
         className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 transition-opacity duration-1000 ease-in-out ${
           isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}
       >
         {/* Header Section */}
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center pt-20 md:mt-15 mb-12 sm:mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold  text-gray-900">
             Frequently Asked Questions
           </h2>
