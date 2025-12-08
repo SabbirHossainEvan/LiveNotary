@@ -12,7 +12,7 @@ const navItems = [
     { name: 'Contact', href: '/contact' },
     { name: 'About', href: '/about' },
     { name: 'FAQs', href: '/faqs' },
-    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Dashboard', href: '/login' },
 ];
 
 const Navbar = () => {
