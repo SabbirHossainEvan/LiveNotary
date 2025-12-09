@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, Fragment } from 'react';
 import { XIcon, FileIcon, PaperclipIcon, SmileIcon, SendIcon, MoreVerticalIcon } from 'lucide-react';
-import { mockChatMessages, getRequestById } from '../../data/mockData';
+import { getRequestById, mockChatMessages } from '@/data/mockData';
+
 
 const EMOJI_LIST = [   '😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃', '😉', '😊', '😇',
   '🥰', '😍', '🤩', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪', '😝', '🤑',
@@ -163,7 +164,7 @@ export const ChatPanel = ({
   };
 
   return (
-    <div className={`fixed inset-y-0 right-0 w-full sm:w-[420px] bg-white shadow-lg z-40 transform 
+    <div className={`fixed inset-y-0 right-0 w-full sm:w-[420px] bg-white shadow-lg z-40 transform mt-20 h-[91%]
         ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 flex flex-col`}>
 
       {/* Header */}
@@ -203,8 +204,8 @@ export const ChatPanel = ({
           </button>
 
           {showOptions && (
-            <div className="absolute top-10 right-0 bg-white shadow-lg border rounded-xl p-1 w-48 z-50">
-              <button onClick={handleViewDetails} className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 flex items-center gap-2">
+            <div className="absolute top-10 right-0 bg-white shadow-lg border border-gray-200 rounded-xl p-1 w-55 z-50">
+              <button onClick={handleViewDetails} className="w-full text-left px-7 py-2 text-sm hover:bg-gray-100 flex  gap-2">
                 <FileIcon className="h-4 w-4" /> View Request Details
               </button>
             </div>
@@ -293,7 +294,7 @@ export const ChatPanel = ({
       </div>
 
       {/* Message Composer */}
-      <div className="px-4 py-3 border-t bg-white">
+      <div className="px-4 py-3  bg-white">
         {isCompleted ? (
           <div className="text-center text-gray-500 text-sm">
             This session is completed. You can no longer send messages.
@@ -311,7 +312,7 @@ export const ChatPanel = ({
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
-                className="w-full py-2 px-4 bg-gray-100 border rounded-full pr-10"
+                className="w-full py-2 px-4 bg-gray-100 border border-gray-300 rounded-full pr-10"
                 placeholder="Type a message..."
               />
 

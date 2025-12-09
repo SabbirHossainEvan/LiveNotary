@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { XIcon, FileTextIcon, MessageSquareIcon, UserIcon, CreditCardIcon, ClockIcon } from 'lucide-react';
-import { getRequestById } from '../../data/mockData';
+import { getRequestById } from '@/data/mockData';
 
 export const RequestDetailsPanel = ({ isOpen, requestId, onClose, onOpenChat, onStartZoom }) => {
   const [activeTab, setActiveTab] = useState('details');
@@ -9,7 +9,7 @@ export const RequestDetailsPanel = ({ isOpen, requestId, onClose, onOpenChat, on
   if (!isOpen || !request) return null;
 
   return (
-    <div className={`fixed inset-y-0 right-0 w-full sm:w-[420px] bg-white shadow-lg z-40 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out flex flex-col`}>
+    <div className={`fixed inset-y-0 mt-20 h-[91%] right-0 w-full sm:w-[420px] bg-white shadow-lg z-40 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out flex flex-col`}>
       {/* Panel Header */}
       <div className="flex justify-between items-center px-4 py-3 border-b border-[#E5E7EB]">
         <div className="flex items-center">
