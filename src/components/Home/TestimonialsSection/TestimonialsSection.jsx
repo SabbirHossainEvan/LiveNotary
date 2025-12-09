@@ -76,7 +76,7 @@ const TestimonialsSection = () => {
   );
 
   return (
-    <section className="py-20 sm:py-28 bg-gray-50">
+    <section id='about-section' className="py-20 sm:py-28 bg-gray-50">
       <div 
         className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-opacity duration-1000 ease-in-out ${
           isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
