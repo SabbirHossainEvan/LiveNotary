@@ -4,7 +4,7 @@ import React from 'react';
 
 const JobCard = ({ job, type }) => {
     // Common styles for the job card
-    const baseCardStyle = "p-6 bg-white rounded-lg hover:shadow-lg transition duration-200 ease-in-out";
+    const baseCardStyle = "p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition duration-200 ease-in-out";
 
     const renderAvailableActions = () => (
         <div className="flex justify-end space-x-3 mt-4">
@@ -18,11 +18,11 @@ const JobCard = ({ job, type }) => {
     );
 
     const renderAcceptedActions = () => (
-        <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
-            <button className="px-6 py-2 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+        <div className="flex justify-between items-center mt-4 pt-4 gap-3 border-gray-100">
+            <button className="px-6 py-2 w-full mt-20 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
                 Message Customer
             </button>
-            <button className="px-6 py-2 text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
+            <button className="px-6 py-2 w-full mt-20 text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
                 Mark as Completed
             </button>
         </div>
@@ -37,7 +37,7 @@ const JobCard = ({ job, type }) => {
         </div>
     );
 
-    // Common details for Available/Accepted jobs
+
     const renderCommonDetails = () => (
         <div className="mt-2 text-sm text-gray-600 grid grid-cols-1 gap-y-1">
             <p>Documents: <span className="font-medium text-gray-900">{job.documents}</span></p>
@@ -50,7 +50,6 @@ const JobCard = ({ job, type }) => {
     );
 
 
-    // Render the appropriate card based on the 'type' prop
     switch (type) {
         case 'available':
             return (

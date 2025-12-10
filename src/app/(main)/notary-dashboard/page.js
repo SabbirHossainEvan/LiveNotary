@@ -98,28 +98,28 @@ const NotaryDashboard = () => {
                 );
             case 'Payments':
                 return (
-                    <div className="p-6 bg-white rounded-lg shadow-sm">
+                    <div className="p-6  ">
                         {/* Total Earnings Section */}
-                        <div className="flex justify-between items-center border-b pb-4 mb-6">
+                        <div className="flex justify-between items-center pb-4 mb-6 space-y-3 p-6 bg-white rounded-lg shadow-sm">
                             <div>
                                 <h3 className="text-xl font-semibold text-gray-700 mb-2">Total Earnings</h3>
-                                <p className="text-5xl font-extrabold text-gray-900 mb-4">${mockData.payments.totalEarnings.toFixed(2)}</p>
-                                <div className="grid grid-cols-3 gap-4 text-sm text-gray-500">
+                                <div className='grid grid-cols-2 justify-between items-center'>
+                                    <p className="text-5xl font-extrabold text-[#2563EB] mb-4">${mockData.payments.totalEarnings.toFixed(2)}</p>
+                                    {/* <p className='text-5xl text-[#2563EB]'>$</p> */}
+                                </div>
+                                <div className="grid grid-cols-1 gap-4 text-sm text-gray-500">
                                     <p>Completed Jobs: <span className="font-medium text-gray-700">{mockData.payments.completedJobs}</span></p>
                                     <p>Average Rating: <span className="font-medium text-gray-700">{mockData.payments.averageRating} / 5.0</span></p>
                                     <p>Next Payout: <span className="font-medium text-gray-700">{mockData.payments.nextPayout}</span></p>
                                 </div>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1L21 12m-6-2h4v4m-4 4h4m-9-2h4m-4 4v4m-5 3h10a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
                         </div>
 
                         {/* Recent Transactions Section */}
-                        <h3 className="text-xl font-semibold text-gray-700 mb-4">Recent Transactions</h3>
-                        <div className="space-y-3">
+                        <div className="space-y-3 p-6 bg-white rounded-lg shadow-sm">
+                                                    <h3 className="text-xl font-semibold text-gray-700 mb-4">Recent Transactions</h3>
                             {mockData.payments.recentTransactions.map((tx, index) => (
-                                <div key={index} className="flex justify-between items-center py-2 border-b last:border-b-0">
+                                <div key={index} className="flex justify-between items-center py-2  last:border-b-0">
                                     <p className="text-gray-900">{tx.name}</p>
                                     <p className="text-gray-500 text-sm">{tx.date}</p>
                                     <p className="text-lg font-semibold text-green-600">${tx.amount.toFixed(2)}</p>
@@ -139,7 +139,6 @@ const NotaryDashboard = () => {
         <div className="min-h-screen bg-gray-50">
             <div className="mx-auto px-4 py-6 max-w-7xl sm:px-6 lg:px-4 pt-20">
 
-                {/* Header Component - Notification integration */}
                 <Header
                     title="Notary Dashboard"
                     subtitle="Manage your notarization jobs"
