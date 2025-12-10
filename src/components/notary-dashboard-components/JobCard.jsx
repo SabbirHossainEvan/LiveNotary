@@ -1,9 +1,8 @@
-// components/JobCard.jsx
+
 
 import React from 'react';
 
 const JobCard = ({ job, type }) => {
-    // Common styles for the job card
     const baseCardStyle = "p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition duration-200 ease-in-out";
 
     const renderAvailableActions = () => (

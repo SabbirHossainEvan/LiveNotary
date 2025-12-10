@@ -8,6 +8,7 @@
 // import Image from 'next/image';
 // import { Menu, X, Bell, UserCircleIcon } from 'lucide-react';
 
+
 // import { NotificationOverlay } from '@/components/Modals/NotificationOverlay'; 
 
 
@@ -45,6 +46,34 @@
     
 
 //     useEffect(() => {
+//         if (typeof window !== 'undefined') {
+//             if (showNotifications) {
+
+//                 const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+                
+//                 // 2. পেজ স্ক্রল ডিজেবল করা
+//                 document.body.style.overflow = 'hidden';
+                
+//                 // 3. ডানদিকে প্যাডিং যোগ করে কনটেন্টকে স্থির রাখা
+//                 document.body.style.paddingRight = `${scrollbarWidth}px`;
+//             } else {
+//                 // বন্ধ করার সময় সব রিসেট করা
+//                 document.body.style.overflow = 'unset'; 
+//                 document.body.style.paddingRight = '0';
+//             }
+//         }
+
+//         // Cleanup function - কম্পোনেন্ট unmount হলে বা স্টেট আপডেট হলে স্ক্রল রিসেট করা
+//         return () => {
+//             if (typeof document !== 'undefined') {
+//                 document.body.style.overflow = 'unset';
+//                 document.body.style.paddingRight = '0';
+//             }
+//         };
+//     }, [showNotifications]);
+
+
+//     useEffect(() => {
 //         function handleClickOutside(event) {
 //             if (notificationRef.current && !notificationRef.current.contains(event.target)) {
 //                 setShowNotifications(false);
@@ -61,6 +90,7 @@
 
 //         <div className="flex items-center space-x-4 relative" ref={notificationRef}> 
             
+//             {/* 🔔 Notification Icon */}
 //             <button 
 //                 onClick={() => setShowNotifications(prev => !prev)}
 //                 className="relative p-1 text-gray-600 hover:text-blue-600 transition-colors focus:outline-none"
@@ -74,14 +104,13 @@
 //                 )}
 //             </button>
 
-//             {/*  User Profile Link */}
+//             {/* 👤 User Profile Link */}
 //             <Link href="/dashboard" className="flex items-center space-x-2 cursor-pointer group">
 //                 <div className="text-right hidden sm:block"> 
 //                     <p className="text-sm font-semibold text-gray-800">John Smith</p>
 //                     <p className="text-xs text-blue-600 group-hover:underline">User Profile</p>
 //                 </div>
                 
-
 //                 <UserCircleIcon className="h-9 w-9 text-[#3B82F6] flex-shrink-0" />
 //             </Link>
 
@@ -93,7 +122,6 @@
 //                     onClose={() => setShowNotifications(false)}
 //                     onMarkAllRead={handleMarkAllRead}
 //                     onMarkRead={handleMarkRead}
-//                     className="-mr-20"
 //                 />
 //             )}
 //         </div>
@@ -130,7 +158,7 @@
 //     };
 
 
-
+//     // --- Scroll Shadow Effect ---
 //     useEffect(() => {
 //         const handleScroll = () => {
 //             setIsScrolled(window.scrollY > 10);
@@ -139,7 +167,7 @@
 //         return () => window.removeEventListener('scroll', handleScroll);
 //     }, []);
 
-   
+//     // --- Intersection Observer (Anchors) ---
 //     useEffect(() => {
 //         if (pathname !== '/') return; 
 
@@ -183,7 +211,7 @@
 //     }, [pathname]);
 
 
-//     // --- Active Link Checker ---
+//     // --- Active Link Checker (আগের সিনট্যাক্স এরর ফিক্স করা আছে) ---
 //     const isActive = (itemHref) => {
 //         if (itemHref === '/') {
 //             return pathname === '/' && activeSection === '/'; 
@@ -264,14 +292,13 @@
 //                     {/* Mobile Menu Button (md:hidden) */}
 //                     <div className="md:hidden flex items-center">
 //                         {isLoggedIn && (
-//                             // Mobile: Logged-in view - just the Bell icon (no profile name/avatar)
+//                             // Mobile: Bell icon
 //                             <button
 //                                 onClick={() => alert('Mobile Notification Overlay Triggered')} 
 //                                 className="relative p-1 text-gray-600 hover:text-blue-600 transition-colors mr-3"
 //                                 aria-label="Notifications"
 //                             >
 //                                 <Bell size={24} />
-
 //                             </button>
 //                         )}
 //                         <button
@@ -350,7 +377,9 @@
 
 // export default Navbar;
 
-'use client';
+// 'use client';
+
+'use client'; // <-- **FIX 1: Uncommented 'use client'**
 
 import React, { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
@@ -358,7 +387,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, Bell, UserCircleIcon } from 'lucide-react';
 
-// আপনার ফাইল স্ট্রাকচার অনুযায়ী সঠিক পাথ নিশ্চিত করুন।
 import { NotificationOverlay } from '@/components/Modals/NotificationOverlay'; 
 
 
@@ -368,13 +396,22 @@ const initialNotifications = [
     { id: 3, title: 'System Alert', description: 'Your storage usage is 90% full.', time: '1 day ago', type: 'alert', read: true },
 ];
 
-const isUserLoggedIn = (currentPathname) => currentPathname.startsWith('/dashboard');
+// FIX 2: All confirmed dashboard base paths
+const DASHBOARD_BASE_PATHS = [
+    '/dashboard',          // User Dashboard (e.g., /dashboard route)
+    '/notary-dashboard',   // Notary Dashboard route
+    '/affiliate-dashboard' // Affiliate Dashboard route
+];
+
+// Check if user is "logged in" based on being on any dashboard page
+const isUserLoggedIn = (currentPathname) => 
+    DASHBOARD_BASE_PATHS.some(path => currentPathname.startsWith(path));
 
 const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Contact', href: '#contact-us' },
-    { name: 'About', href: '#about-section' },  
-    { name: 'FAQs', href: '#faqs-section' },    
+    { name: 'About', href: '#about-section' },  
+    { name: 'FAQs', href: '#faqs-section' },    
     { name: 'Dashboard', href: '/login' }, 
 ];
 
@@ -394,27 +431,19 @@ const UserProfileDisplay = () => {
         setNotifications(prev => prev.map(n => ({ ...n, read: true })));
     };
     
-    // --- FIX: Body Overflow and Scrollbar Gutter Fix (স্ক্রল জাম্পের চূড়ান্ত সমাধান) ---
+    // --- Body Overflow and Scrollbar Gutter Fix ---
     useEffect(() => {
         if (typeof window !== 'undefined') {
             if (showNotifications) {
-                // 1. স্ক্রলবার উইডথ পরিমাপ করা
-                // Inner width - Client width = স্ক্রলবারের প্রস্থ
                 const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-                
-                // 2. পেজ স্ক্রল ডিজেবল করা
                 document.body.style.overflow = 'hidden';
-                
-                // 3. ডানদিকে প্যাডিং যোগ করে কনটেন্টকে স্থির রাখা
                 document.body.style.paddingRight = `${scrollbarWidth}px`;
             } else {
-                // বন্ধ করার সময় সব রিসেট করা
                 document.body.style.overflow = 'unset'; 
                 document.body.style.paddingRight = '0';
             }
         }
 
-        // Cleanup function - কম্পোনেন্ট unmount হলে বা স্টেট আপডেট হলে স্ক্রল রিসেট করা
         return () => {
             if (typeof document !== 'undefined') {
                 document.body.style.overflow = 'unset';
@@ -456,7 +485,7 @@ const UserProfileDisplay = () => {
             </button>
 
             {/* 👤 User Profile Link */}
-            <Link href="/dashboard" className="flex items-center space-x-2 cursor-pointer group">
+            <Link href={DASHBOARD_BASE_PATHS[0] || '/dashboard'} className="flex items-center space-x-2 cursor-pointer group">
                 <div className="text-right hidden sm:block"> 
                     <p className="text-sm font-semibold text-gray-800">John Smith</p>
                     <p className="text-xs text-blue-600 group-hover:underline">User Profile</p>
@@ -562,16 +591,32 @@ const Navbar = () => {
     }, [pathname]);
 
 
-    // --- Active Link Checker (আগের সিনট্যাক্স এরর ফিক্স করা আছে) ---
+    // --- Active Link Checker (FIXED LOGIC) ---
     const isActive = (itemHref) => {
+        // 1. Home Link Check
         if (itemHref === '/') {
             return pathname === '/' && activeSection === '/'; 
         }
         
+        // 2. Anchor Link Check
         if (itemHref.startsWith('#')) {
             return activeSection === itemHref.replace('#', '');
         }
 
+        // 3. Dashboard Link Check 
+        if (itemHref === '/login' || itemHref === '/dashboard') {
+            
+            // Current path login/signup or any of the dashboard base paths 
+            const isAnyDashboardOrAuthPage = (
+                pathname === '/login' ||
+                pathname === '/signup' ||
+                DASHBOARD_BASE_PATHS.some(path => pathname.startsWith(path))
+            );
+
+            return isAnyDashboardOrAuthPage;
+        }
+        
+        // 4. General Sub-route check (if needed)
         if (itemHref.startsWith('/')) {
             return pathname.startsWith(itemHref);
         }
@@ -601,13 +646,17 @@ const Navbar = () => {
 
                     <div className="hidden md:flex items-center space-x-8">
                         {navItems.map((item) => {
-                            const linkHref = (item.name === 'Dashboard' && isLoggedIn) ? '/dashboard' : item.href;
+                            // Dashboard link path dynamically set hobe
+                            const linkHref = (item.name === 'Dashboard' && isLoggedIn) 
+                                ? DASHBOARD_BASE_PATHS[0] || '/dashboard' // Logged in hole default dashboard route
+                                : item.href;
                             
                             return (
                                 <Link
                                     key={item.name}
                                     href={linkHref} 
-                                    onClick={() => handleNavItemClick(item.href)}
+                                    // handleNavItemClick ekhono original href use korche jate anchor link gulo thik kaj kore
+                                    onClick={() => handleNavItemClick(item.href)} 
                                     className={`
                                         text-gray-600 hover:text-blue-600 font-medium transition duration-300 
                                         relative group py-2
@@ -650,6 +699,7 @@ const Navbar = () => {
                                 aria-label="Notifications"
                             >
                                 <Bell size={24} />
+
                             </button>
                         )}
                         <button
@@ -668,7 +718,7 @@ const Navbar = () => {
                 className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out 
                 ${isOpen ? 'max-h-screen opacity-100 py-2' : 'max-h-0 opacity-0 pointer-events-none'}
                 bg-white/95 backdrop-blur-sm shadow-inner
-            `}
+                `}
             >
                 <div className="flex flex-col space-y-1 px-4 pt-2 pb-3">
                     
@@ -685,7 +735,9 @@ const Navbar = () => {
 
                     {/* Nav Items */}
                     {navItems.map((item) => {
-                        const linkHref = (item.name === 'Dashboard' && isLoggedIn) ? '/dashboard' : item.href;
+                        const linkHref = (item.name === 'Dashboard' && isLoggedIn) 
+                            ? DASHBOARD_BASE_PATHS[0] || '/dashboard' 
+                            : item.href;
 
                         return (
                             <Link
@@ -706,15 +758,15 @@ const Navbar = () => {
                     })}
                     
                     {isLoggedIn ? (
-                        <Link href="/dashboard" onClick={() => setIsOpen(false)}>
+                        <Link href={DASHBOARD_BASE_PATHS[0] || '/dashboard'} onClick={() => setIsOpen(false)}>
                             <button className={`mt-4 w-full px-5 py-2 bg-blue-600 text-white font-medium rounded-lg 
                                 hover:bg-blue-700 transition duration-300 shadow-md`}>
                                 View Dashboard
                             </button>
                         </Link>
                     ) : (
-                         <Link href="/login" onClick={() => setIsOpen(false)}>
-                            <button className={`mt-4 w-full px-5 py-2 bg-blue-600 text-white font-medium rounded-lg 
+                           <Link href="/login" onClick={() => setIsOpen(false)}>
+                                <button className={`mt-4 w-full px-5 py-2 bg-blue-600 text-white font-medium rounded-lg 
                                 hover:bg-blue-700 transition duration-300 shadow-md`}>
                                 Get Started
                             </button>

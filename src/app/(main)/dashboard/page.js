@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import React, { useState } from 'react';
@@ -14,7 +13,7 @@ import { Toast } from '@/components/ui/Toast';
 import { mockRequests, mockHistoryRequests } from '@/data/mockData';
 
 export default function DashboardPage() {
-  // State for notifications
+
   const [notifications, setNotifications] = useState([
     {
       id: '1',
@@ -42,61 +41,57 @@ export default function DashboardPage() {
     }
   ]);
 
-  // Handle Mark All Read
+
   const handleMarkAllRead = () => {
     setNotifications(prev => prev.map(n => ({ ...n, read: true })));
   };
 
-  // Handle Mark Single Read
   const handleMarkRead = (id) => {
     setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
   };
 
-  // Derived unread count
   const unreadCount = notifications.filter(n => !n.read).length;
 
-  // Modal states
+
   const [isNotarizeModalOpen, setIsNotarizeModalOpen] = useState(false);
   const [isScheduleMode, setIsScheduleMode] = useState(false);
 
-  // Slide-in panel states
   const [isChatPanelOpen, setIsChatPanelOpen] = useState(false);
   const [isDetailsPanelOpen, setIsDetailsPanelOpen] = useState(false);
 
-  // Active request/chat states
+
   const [activeRequestId, setActiveRequestId] = useState(null);
 
-  // Toast notification state
   const [toast, setToast] = useState({
     message: '',
     type: null
   });
 
-  // Open notarize modal
+
   const openNotarizeModal = (scheduleMode = false) => {
     setIsScheduleMode(scheduleMode);
     setIsNotarizeModalOpen(true);
   };
 
-  // Open chat panel
+
   const openChatPanel = (requestId) => {
     setActiveRequestId(requestId);
     setIsChatPanelOpen(true);
   };
 
-  // Open request details panel
+
   const openDetailsPanel = (requestId) => {
     setActiveRequestId(requestId);
     setIsDetailsPanelOpen(true);
   };
 
-  // Show toast notification
+
   const showToast = (message, type) => {
     setToast({ message, type });
     setTimeout(() => setToast({ message: '', type: null }), 5000);
   };
 
-  // Handle new notarization submission
+
   const handleNotarizeSubmit = () => {
     setIsNotarizeModalOpen(false);
     if (isScheduleMode) {

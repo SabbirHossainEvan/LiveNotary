@@ -60,15 +60,6 @@ const HeroSection = () => {
                 </div>
             </div>
 
-            {/* <button className="fixed bottom-6 right-6 p-4 rounded-full bg-blue-600 text-white shadow-xl 
-                transition duration-300 hover:bg-blue-700 
-                animate-pulse hover:animate-none">
-                <span className="flex items-center justify-center transform rotate-90">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </span>
-            </button> */}
         </section>
     );
 };

@@ -2,6 +2,7 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const states = ["Select your state", "California", "Texas", "Florida", "New York"];
 
@@ -102,6 +103,17 @@ const NotaryForm = () => {
             >
                 {loading ? 'Creating Account...' : 'Create Account'}
             </button>
+
+            <div className="mt-4 pt-4  text-sm text-center">
+                <p className='text-gray-600 inline'>Already have an account? </p>
+
+                <Link 
+                    href="/login" 
+                    className="text-blue-600 hover:text-blue-800 font-medium transition duration-200"
+                >
+                    Sign In
+                </Link>
+            </div>
         </form>
     );
 };

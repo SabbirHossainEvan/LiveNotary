@@ -105,7 +105,7 @@ const NotaryDashboard = () => {
                                 <h3 className="text-xl font-semibold text-gray-700 mb-2">Total Earnings</h3>
                                 <div className='grid grid-cols-2 justify-between items-center'>
                                     <p className="text-5xl font-extrabold text-[#2563EB] mb-4">${mockData.payments.totalEarnings.toFixed(2)}</p>
-                                    {/* <p className='text-5xl text-[#2563EB]'>$</p> */}
+
                                 </div>
                                 <div className="grid grid-cols-1 gap-4 text-sm text-gray-500">
                                     <p>Completed Jobs: <span className="font-medium text-gray-700">{mockData.payments.completedJobs}</span></p>

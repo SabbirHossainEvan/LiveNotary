@@ -1,19 +1,19 @@
 
-import React, { useState } from 'react';
-import { XIcon, UploadCloud } from 'lucide-react';
+
+import React, { useState } from 'react'; 
+import { XIcon, UploadCloud, FileText } from 'lucide-react'; 
 
 
 export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => {
-    // Form State (No changes here)
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [docTypeOptional, setDocTypeOptional] = useState('');
-    const [documentFile, setDocumentFile] = useState(null);
+    const [documentFile, setDocumentFile] = useState(null); 
 
-    // Signers (No changes here)
+
     const [numberOfSigners, setNumberOfSigners] = useState(2);
     const [signers, setSigners] = useState([
         { name: '', email: '' },
@@ -23,7 +23,7 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
 
     if (!isOpen) return null;
 
-    // --- Helper Functions (No changes here) ---
+
     const handleSignerCountChange = (e) => {
         const count = parseInt(e.target.value);
         setNumberOfSigners(count);
@@ -44,30 +44,53 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
         setSigners(newSigners);
     };
 
+
     const handleFileChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
+
+        if (e.target.files && e.target.files.length > 0) {
             setDocumentFile(e.target.files[0]);
         }
     };
 
+
+    const handleClearFile = (e) => {
+        e.preventDefault(); 
+        e.stopPropagation(); 
+        setDocumentFile(null);
+
+        const fileInput = document.getElementById('document-upload');
+        if (fileInput) {
+            fileInput.value = '';
+        }
+    };
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add form validation logic here before submitting
+
+        if (!documentFile) {
+            alert("Please upload a document before submitting.");
+            return;
+        }
+
+        console.log("Submitting file:", documentFile); 
+        console.log("Other data:", { fullName, email, phone, docTypeOptional, signers });
+
         onSubmit();
-        // resetForm(); 
+
     };
-    // ----------------------------------------
+
 
     return (
         <div className="fixed inset-0 z-50 overflow-y-auto mt-20">
             <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-                {/* Background Overlay */}
+
                 <div
                     className="fixed inset-0 transition-opacity bg-transparent bg-opacity-75"
                     onClick={onClose}
                 ></div>
 
-                {/* Modal Container */}
+
                 <div className="inline-block w-full max-w-xl my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded-lg shadow-xl">
 
                     {/* Header */}
@@ -85,7 +108,7 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
 
                     <form onSubmit={handleSubmit} className="px-6 pb-6 max-h-[85vh] overflow-y-auto">
 
-                        {/* Contact Info (First Grid) - Matched to Screenshot 2 */}
+
                         <div className="grid grid-cols-2 gap-4 mt-6">
                             {/* Full Name */}
                             <div>
@@ -94,7 +117,7 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
                                 </label>
                                 <input
                                     type="text"
-                                    className="block w-full px-3 py-2 text-sm text-gray-800 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" // Adjusted for look
+                                    className="block w-full px-3 py-2 text-sm text-gray-800 bg-white border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                                     value={fullName}
                                     onChange={(e) => setFullName(e.target.value)}
                                     required
@@ -140,14 +163,13 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
                             </div>
                         </div>
 
-                        {/* Schedule Fields (Conditional, if needed) */}
+
                         {isScheduleMode && (
                             <div className="grid grid-cols-2 gap-4 mt-4">
-                                {/* ... Schedule Inputs ... */}
                             </div>
                         )}
 
-                        {/* Upload Document - Matched to Screenshot 2 */}
+
                         <div className="mt-4">
                             <label className="block mb-1 text-sm font-medium text-gray-700">
                                 Upload Document <span className="text-red-500">*</span>
@@ -155,16 +177,24 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
                             <div className="flex items-center justify-center w-full">
                                 <label
                                     htmlFor="document-upload"
-                                    className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-white ${documentFile ? 'border-blue-500' : 'border-gray-300 hover:border-blue-500'
-                                        } transition-colors`}
+                                    className={`relative flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-white 
+                                    ${documentFile ? 'border-blue-500 bg-blue-50 hover:bg-blue-100' : 'border-gray-300 hover:border-blue-500 hover:bg-gray-50'
+                                        } transition-colors p-4`}
                                 >
-                                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <div className="flex flex-col items-center justify-center pt-5 pb-6 text-center">
                                         {documentFile ? (
                                             <>
-                                                {/* If file is uploaded, you may want to show the file name */}
-                                                <XIcon className="w-6 h-6 mb-2 text-blue-500" />
-                                                <p className="text-sm text-gray-800 font-medium">{documentFile.name}</p>
-                                                <p className="text-xs text-gray-500">Click to change file</p>
+                                                <FileText className="w-8 h-8 mb-2 text-blue-600" />
+                                                <p className="text-sm text-gray-800 font-medium truncate w-full px-2">{documentFile.name}</p>
+                                                <p className="text-xs text-blue-600 mt-1">Click or drag new file to change</p>
+
+                                                <button
+                                                    onClick={handleClearFile}
+                                                    className="absolute top-2 right-2 p-1 text-red-500 hover:text-red-700 rounded-full bg-white/70 shadow"
+                                                    aria-label="Remove document"
+                                                >
+                                                    <XIcon className="w-4 h-4" />
+                                                </button>
                                             </>
                                         ) : (
                                             <>
@@ -186,8 +216,6 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
                                 </label>
                             </div>
                         </div>
-
-                        {/* Signers Section - Matched to Screenshot 2 */}
 
                         <div className="mt-6 space-y-4">
                             {/* Number of Signers */}
@@ -214,7 +242,6 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
                                     <h4 className="text-sm font-medium text-gray-700 mb-2">Signer {index + 1}</h4>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
-                                            {/* Name Label is directly above the input in Screenshot 2 */}
                                             <label className="block mb-1 text-sm text-gray-500">Name</label>
                                             <input
                                                 type="text"
@@ -225,7 +252,6 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
                                             />
                                         </div>
                                         <div>
-                                            {/* Email Label is directly above the input in Screenshot 2 */}
                                             <label className="block mb-1 text-sm text-gray-500">Email</label>
                                             <input
                                                 type="email"
@@ -240,7 +266,8 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
                             ))}
                         </div>
 
-                        <div className="flex justify-end pt-4 border-t border-[#E5E7EB]">
+
+                        <div className="flex justify-end pt-4 border-t border-[#E5E7EB] mt-6">
                             {/* Cancel Button */}
                             <button
                                 type="button"
@@ -250,7 +277,6 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
                                 Cancel
                             </button>
 
-                            {/* Submit/Schedule Button */}
                             <button
                                 type="submit"
                                 className="px-8 py-2.5 bg-[#3B82F6] hover:bg-[#2563EB] text-white text-sm font-medium rounded-lg transition-colors shadow-sm"
