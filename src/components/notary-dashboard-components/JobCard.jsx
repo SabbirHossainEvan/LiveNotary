@@ -18,7 +18,7 @@ const JobCard = ({ job, type }) => {
     );
 
     const renderAcceptedActions = () => (
-        <div className="flex justify-between items-center mt-4 pt-4 gap-3 border-gray-100">
+        <div className="flex justify-between items-center mt-4 pt-4 gap-2 border-gray-100">
             <button className="px-6 py-2 w-full mt-20 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
                 Message Customer
             </button>
