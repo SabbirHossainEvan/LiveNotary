@@ -12,8 +12,7 @@ const SignerForm = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await new Promise(resolve => setTimeout(resolve, 1500)); 
-            // Signer সফল হলে: Dashboard এ নিয়ে যান
+            await new Promise(resolve => setTimeout(resolve, 1500)); 4
             router.push('/dashboard'); 
         } catch (error) {
             console.error('Sign up failed:', error);

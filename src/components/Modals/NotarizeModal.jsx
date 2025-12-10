@@ -210,7 +210,7 @@ export const NotarizeModal = ({ isOpen, isScheduleMode, onClose, onSubmit }) => 
 
                             {/* Individual Signer Fields */}
                             {signers.map((signer, index) => (
-                                <div key={index} className="bg-white p-0"> {/* Removed border and shadow */}
+                                <div key={index} className="bg-white p-0"> 
                                     <h4 className="text-sm font-medium text-gray-700 mb-2">Signer {index + 1}</h4>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
