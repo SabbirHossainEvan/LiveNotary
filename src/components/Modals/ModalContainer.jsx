@@ -13,13 +13,13 @@ const ModalContainer = ({ children, title = 'Modal' }) => {
     return (
 
         <div 
-            className="fixed inset-0  bg-transparent bg-opacity-40 flex items-center justify-center p-4 transition-opacity duration-300 top-20" 
+            className="fixed inset-0  bg-transparent bg-opacity-40 backdrop-blur-lg flex items-center justify-center p-4 transition-opacity duration-300 top-20" 
             onClick={handleClose}
         >
             
             {/* Modal Content Container */}
             <div 
-                className="bg-white rounded-xl shadow-2xl w-full md:w-[24%] max-w-lg max-h-[90vh] overflow-y-auto transform scale-100 transition-transform duration-300 relative" 
+                className=" rounded-xl shadow-2xl w-full md:w-[24%] max-w-lg max-h-[90vh] overflow-y-auto transform scale-100 transition-transform bg-transparent bg-opacity-40 backdrop-blur-lg duration-300 relative" 
 
                 onClick={(e) => e.stopPropagation()}
             >

@@ -21,7 +21,7 @@ const SignupModal = () => {
     if (currentRole === 'affiliate') FormComponent = AffiliateForm;
 
     return (
-        <div className="p-4">
+        <div className="p-4 ">
             {/* Tab Navigation Section */}
             <div className="grid grid-cols-3 gap-3 mb-6">
                 {tabs.map((tab) => (

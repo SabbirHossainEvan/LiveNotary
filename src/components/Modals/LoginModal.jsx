@@ -30,7 +30,7 @@ const LoginModal = () => {
     };
 
     return (
-        <div>
+        <div className=''>
             <form className="space-y-4" onSubmit={handleSubmit}>
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required />
@@ -48,7 +48,7 @@ const LoginModal = () => {
             </form>
             
             {/* Sign Up Link */}
-            <div className="mt-4 pt-4  text-sm text-center">
+            <div className="mt-4 pt-4  text-sm text-center ">
                 <p className='text-gray-600 inline'>Don t have an account? </p>
 
                 <Link 
