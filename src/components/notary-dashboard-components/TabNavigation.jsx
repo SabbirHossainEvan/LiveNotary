@@ -4,7 +4,7 @@ import React from 'react';
 const TabNavigation = ({ tabs, activeTab, setActiveTab }) => {
   return (
     <div className="border-b border-gray-200">
-      <nav className="-mb-px grid grid-cols-2 md:grid-cols-4 space-x-8" aria-label="Tabs">
+      <nav className="-mb-px grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-0 space-x-8" aria-label="Tabs">
         {tabs.map((tab) => (
           <button
             key={tab}
