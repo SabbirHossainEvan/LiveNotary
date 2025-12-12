@@ -48,7 +48,6 @@ const LoginModal = () => {
 
     return (
         <div className='p-0 sm:p-4'>
-            {/* 🚀 Role Selection Tabs */}
             <div className="flex justify-between gap-3 mb-6 p-1  rounded-xl">
                 {tabs.map((tab) => (
                     <button
@@ -56,10 +55,10 @@ const LoginModal = () => {
                         onClick={() => setCurrentRole(tab.role)}
                         type="button" 
                         className={`
-                            flex-1 p-3 text-sm rounded-lg bg-gray-100 transition duration-300 text-center
+                            px-8 py-5 rounded-lg border transition duration-200 text-center
                             ${currentRole === tab.role 
-                                ? 'border-2 bg-white border-blue-200 text-blue-700 font-bold'
-                                : 'text-gray-600 hover:text-gray-900 font-medium'
+                                ? 'bg-blue-50 border-blue-600 text-blue-800 shadow-md'
+                                : 'bg-white border-gray-300 hover:bg-gray-50 text-gray-700'
                             }
                         `}
                     >
@@ -74,7 +73,7 @@ const LoginModal = () => {
                     placeholder="Email Address" 
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)} 
-                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150" 
+                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-1 focus:outline-none  focus:ring-blue-500 focus:border-blue-500 transition duration-150" 
                     required 
                 />
                 <input 
@@ -82,7 +81,7 @@ const LoginModal = () => {
                     placeholder="Password" 
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
-                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150" 
+                    className="w-full p-3 border border-gray-300 rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition duration-150" 
                     required 
                 />
                 

@@ -22,7 +22,7 @@ const HeroSection = () => {
     ];
 
     return (
-        <section className="[background:linear-gradient(to_top,#FFFFFF_0%,#EFF6FF_100%)] py-28 sm:py-32 overflow-hidden">
+        <section  className="[background:linear-gradient(to_top,#FFFFFF_0%,#EFF6FF_100%)] py-28 sm:py-32 overflow-hidden">
             <div
                 className={`
                     max-w-5xl mx-auto px-4 text-center transition-opacity duration-1000 ease-in-out
