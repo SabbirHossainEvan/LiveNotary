@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 
+// Assuming these components are located in '@/components/'
 import { NotarizeModal } from '@/components/Modals/NotarizeModal';
 import { NotarizationPanel } from '@/components/NotarizationPanel';
 import { ActiveRequestsSection } from '@/components/ActiveRequestsSection';
@@ -12,7 +13,7 @@ import { RequestDetailsPanel } from '@/components/slide-ins/RequestDetailsPanel'
 import { Toast } from '@/components/ui/Toast';
 import { mockRequests, mockHistoryRequests } from '@/data/mockData';
 
-export default function DashboardPage() {
+export default function SignerDashboardPage() { // Renamed for clarity
 
   const [notifications, setNotifications] = useState([
     {
@@ -50,16 +51,10 @@ export default function DashboardPage() {
     setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
   };
 
-  const unreadCount = notifications.filter(n => !n.read).length;
-
-
   const [isNotarizeModalOpen, setIsNotarizeModalOpen] = useState(false);
   const [isScheduleMode, setIsScheduleMode] = useState(false);
-
   const [isChatPanelOpen, setIsChatPanelOpen] = useState(false);
   const [isDetailsPanelOpen, setIsDetailsPanelOpen] = useState(false);
-
-
   const [activeRequestId, setActiveRequestId] = useState(null);
 
   const [toast, setToast] = useState({
@@ -106,7 +101,7 @@ export default function DashboardPage() {
 
       <main className="flex-1 container mx-auto px-4 py-6 max-w-7xl">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#1F2937]">User Dashboard</h1>
+          <h1 className="text-3xl font-bold text-[#1F2937]">Signer Dashboard</h1>
           <p className="text-[#6B7280] mt-2 text-lg">Manage your notarization requests</p>
         </div>
 

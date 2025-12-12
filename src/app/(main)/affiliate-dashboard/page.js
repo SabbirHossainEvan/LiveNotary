@@ -1,14 +1,14 @@
 
-
-"use client"; 
+'use client'; 
 
 import AffiliateHeader from '@/components/affiliate-dashboard-components/AffiliateHeader';
 import CommissionRow from '@/components/affiliate-dashboard-components/CommissionRow';
 import OverviewCard from '@/components/affiliate-dashboard-components/OverviewCard';
 import PayoutHistoryRow from '@/components/affiliate-dashboard-components/PayoutHistoryRow';
 import TabNavigation from '@/components/affiliate-dashboard-components/TabNavigation';
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import QRCode from 'qrcode'
+import { saveAs } from 'file-saver';
 
 
 // --- MOCK DATA ---
@@ -41,10 +41,40 @@ const TABS = ['Overview', 'My Referral Link', 'Commission History', 'Payments'];
 // --- END MOCK DATA ---
 
 
-const AffiliateDashboard = () => {
+export default function AffiliateDashboardPage() { // Renamed for clarity
   const [activeTab, setActiveTab] = useState(TABS[0]);
+  const [qrDataUrl,setQrDataUrl] = useState('')
+
+  const generateQRCode = async () => {
+    try {
+      // Generate the QR code as a Data URL and update state
+      const dataUrl = await QRCode.toDataURL(mockData.referralLink, { width: 250 });
+      setQrDataUrl(dataUrl);
+ 
+      // We can also draw directly to the canvas ref if needed,
+      // but using the data URL in an <img> tag is simpler in React.
+ 
+    } catch (err) {
+      console.error('Failed to generate QR code', err);
+    }
+  };
+ 
+  // Function to download the generated QR code
+  const downloadQRCode = () => {
+    if (qrDataUrl) {
+      // Use file-saver to download the Data URL as a PNG file
+      saveAs(qrDataUrl, 'qrcode.png');
+    } else {
+      alert("Please generate a QR code first.");
+    }
+  };
+
+  
+        generateQRCode()
+
 
   const renderContent = () => {
+
     switch (activeTab) {
       case 'Overview':
         const { overview } = mockData;
@@ -97,8 +127,9 @@ const AffiliateDashboard = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-4">QR Code</h3>
               {/* Placeholder for QR Code Image */}
               <div className="w-40 h-40 mb-4 flex items-center justify-center border border-gray-200 rounded-lg">
-                              </div>
-              <button className="px-6 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition flex items-center space-x-2">
+               <img src={qrDataUrl} alt="Generated QR Code" />
+                      </div>
+              <button onClick={()=> downloadQRCode()} className="px-6 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition flex items-center space-x-2">
                 {/* Download Icon */}
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
                 <span>Download QR Code</span>
@@ -127,7 +158,7 @@ const AffiliateDashboard = () => {
             <div className="bg-white p-6 rounded-xl shadow-md flex justify-between items-center">
               <div>
                 <h3 className="text-lg font-medium text-gray-600 mb-2">Available Balance</h3>
-                <p className="text-4xl font-extrabold  text-[#2563EB] mb-1">${availableBalance.toFixed(2)}</p>
+                <p className="text-4xl font-extrabold  text-[#2563EB] mb-1">${availableBalance.toFixed(2)}</p>
                 <p className="text-sm text-gray-500">Minimum payout threshold: ${minimumThreshold.toFixed(2)}</p>
               </div>
               <button 
@@ -151,7 +182,7 @@ const AffiliateDashboard = () => {
                 ))}
               </div>
               {payoutHistory.length === 0 && (
-                 <div className="p-4 text-center text-gray-500">No payout history found.</div>
+                  <div className="p-4 text-center text-gray-500">No payout history found.</div>
               )}
             </div>
           </div>
@@ -188,4 +219,3 @@ const AffiliateDashboard = () => {
   );
 };
 
-export default AffiliateDashboard;

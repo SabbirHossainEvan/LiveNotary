@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
+    "file-saver": "^2.0.5",
     "lucide-react": "^0.556.0",
     "next": "16.0.7",
+    "qrcode": "^1.5.4",
+    "qrcode.react": "^4.2.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-intersection-observer": "^10.0.0"
