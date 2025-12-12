@@ -1,7 +1,7 @@
 
 
 
-'use client'; 
+'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, Bell, UserCircleIcon } from 'lucide-react';
 
-import { NotificationOverlay } from '@/components/Modals/NotificationOverlay'; 
+import { NotificationOverlay } from '@/components/Modals/NotificationOverlay';
 
 
 const initialNotifications = [
@@ -26,15 +26,15 @@ const DASHBOARD_BASE_PATHS = [
 ];
 
 // Check if user is "logged in" based on being on any dashboard page
-const isUserLoggedIn = (currentPathname) => 
+const isUserLoggedIn = (currentPathname) =>
     DASHBOARD_BASE_PATHS.some(path => currentPathname.startsWith(path));
 
 const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Contact', href: '#contact-us' },
-    { name: 'About', href: '#about-section' },  
-    { name: 'FAQs', href: '#faqs-section' },    
-    { name: 'Dashboard', href: '/login' }, 
+    { name: 'About', href: '/#about-section' },
+    { name: 'FAQs', href: '/#faqs-section' },
+    { name: 'Contact', href: '/#contact-us' },
+    { name: 'Dashboard', href: '/login' },
 ];
 
 
@@ -52,7 +52,9 @@ const UserProfileDisplay = () => {
     const handleMarkAllRead = () => {
         setNotifications(prev => prev.map(n => ({ ...n, read: true })));
     };
-    
+
+
+
     // --- Body Overflow and Scrollbar Gutter Fix ---
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -61,7 +63,7 @@ const UserProfileDisplay = () => {
                 document.body.style.overflow = 'hidden';
                 document.body.style.paddingRight = `${scrollbarWidth}px`;
             } else {
-                document.body.style.overflow = 'unset'; 
+                document.body.style.overflow = 'unset';
                 document.body.style.paddingRight = '0';
             }
         }
@@ -90,10 +92,10 @@ const UserProfileDisplay = () => {
 
     return (
 
-        <div className="flex items-center space-x-4 relative" ref={notificationRef}> 
-            
+        <div className="flex items-center space-x-4 relative" ref={notificationRef}>
+
             {/* 🔔 Notification Icon */}
-            <button 
+            <button
                 onClick={() => setShowNotifications(prev => !prev)}
                 className="relative p-1 text-gray-600 hover:text-blue-600 transition-colors focus:outline-none"
                 aria-label="Toggle notifications"
@@ -108,18 +110,18 @@ const UserProfileDisplay = () => {
 
             {/* 👤 User Profile Link */}
             <Link href={DASHBOARD_BASE_PATHS[0] || '/dashboard'} className="flex items-center space-x-2 cursor-pointer group">
-                <div className="text-right hidden sm:block"> 
+                <div className="text-right hidden sm:block">
                     <p className="text-sm font-semibold text-gray-800">John Smith</p>
                     <p className="text-xs text-blue-600 group-hover:underline">User Profile</p>
                 </div>
-                
+
                 <UserCircleIcon className="h-9 w-9 text-[#3B82F6] flex-shrink-0" />
             </Link>
 
 
             {/* --- Notification Modal/Overlay Conditional Rendering --- */}
             {showNotifications && (
-                <NotificationOverlay 
+                <NotificationOverlay
                     notifications={notifications}
                     onClose={() => setShowNotifications(false)}
                     onMarkAllRead={handleMarkAllRead}
@@ -137,8 +139,8 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
-    const [activeSection, setActiveSection] = useState('/'); 
-    
+    const [activeSection, setActiveSection] = useState('/');
+
     const isLoggedIn = isUserLoggedIn(pathname);
 
 
@@ -146,24 +148,32 @@ const Navbar = () => {
         setIsOpen(!isOpen);
     };
 
-    
+
     const handleNavItemClick = (itemHref) => {
         if (itemHref.startsWith('#')) {
             const sectionKey = itemHref.replace('#', '');
-            setActiveSection(sectionKey); 
+            setActiveSection(sectionKey);
         } else if (itemHref === '/') {
-             setActiveSection('/');
+            setActiveSection('/');
         } else {
-             setActiveSection(itemHref);
+            setActiveSection(itemHref);
         }
         setIsOpen(false);
     };
 
 
-    // --- Scroll Shadow Effect ---
+    // --- Scroll Shadow Effect & Home Active State ---
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
+            const scrollY = window.scrollY;
+
+            // 1. Shadow effect
+            setIsScrolled(scrollY > 10);
+
+            // 2. Force "Home" active at very top
+            if (scrollY < 150) {
+                setActiveSection('/');
+            }
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
@@ -171,7 +181,7 @@ const Navbar = () => {
 
     // --- Intersection Observer (Anchors) ---
     useEffect(() => {
-        if (pathname !== '/') return; 
+        if (pathname !== '/') return;
 
         const sectionIds = ['contact-us', 'about-section', 'faqs-section'];
         const sectionElements = sectionIds
@@ -179,8 +189,8 @@ const Navbar = () => {
             .filter(el => el != null);
 
         const observerOptions = {
-            root: null, 
-            rootMargin: '-50% 0px -50% 0px', 
+            root: null,
+            rootMargin: '-50% 0px -50% 0px',
             threshold: 0,
         };
 
@@ -189,17 +199,17 @@ const Navbar = () => {
 
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    if (entry.target.id === 'contact-us') foundActive = 'contact-us'; 
+                    if (entry.target.id === 'contact-us') foundActive = 'contact-us';
                     if (entry.target.id === 'about-section') foundActive = 'about-section';
                     if (entry.target.id === 'faqs-section') foundActive = 'faqs-section';
                 }
             });
-            
+
+
+
+            // If any section intersected → set active
             if (foundActive) {
-                setActiveSection(foundActive); 
-            } 
-            else if (window.scrollY < 150) { 
-                setActiveSection('/');
+                setActiveSection(foundActive);
             }
 
 
@@ -217,17 +227,18 @@ const Navbar = () => {
     const isActive = (itemHref) => {
         // 1. Home Link Check
         if (itemHref === '/') {
-            return pathname === '/' && activeSection === '/'; 
+            return pathname === '/' && activeSection === '/';
         }
-        
+
         // 2. Anchor Link Check
-        if (itemHref.startsWith('#')) {
-            return pathname === '/' && activeSection === itemHref.replace('#', '');
+        if (itemHref.startsWith('/#')) {
+            return pathname === '/' && activeSection === itemHref.replace('/#', '');
         }
+
 
         // 3. Dashboard Link Check 
         if (itemHref === '/login' || itemHref === '/dashboard') {
-            
+
             // Current path login/signup or any of the dashboard base paths 
             const isAnyDashboardOrAuthPage = (
                 pathname === '/login' ||
@@ -237,12 +248,12 @@ const Navbar = () => {
 
             return isAnyDashboardOrAuthPage;
         }
-        
+
         // 4. General Sub-route check (if needed)
         if (itemHref.startsWith('/')) {
             return pathname.startsWith(itemHref);
         }
-        
+
         return false;
     };
 
@@ -253,7 +264,7 @@ const Navbar = () => {
             ${isScrolled ? 'shadow-lg bg-white backdrop-blur-sm' : 'bg-white'}
         `}>
             <nav className="px-6 md:px-18 lg:px-20">
-                <div className="flex justify-between items-center h-16"> 
+                <div className="flex justify-between items-center h-16">
 
                     <Link href="/" className="flex items-center ">
                         <Image
@@ -268,24 +279,24 @@ const Navbar = () => {
 
                     <div className="hidden md:flex items-center space-x-8">
                         {navItems.map((item) => {
-                            
+
                             let linkHref = item.href;
 
                             // 1. Dashboard Link Path (logged in user)
                             if (item.name === 'Dashboard' && isLoggedIn) {
                                 linkHref = DASHBOARD_BASE_PATHS[0] || '/dashboard';
-                            } 
-                            
-                            else if (isLoggedIn && item.href.startsWith('#')) { 
-                                linkHref = '/' + item.href; 
+                            }
+
+                            else if (isLoggedIn && item.href.startsWith('#')) {
+                                linkHref = '/' + item.href;
                             }
                             // --- FIX END ---
 
                             return (
                                 <Link
                                     key={item.name}
-                                    href={linkHref} 
-                                    onClick={() => handleNavItemClick(item.href)} 
+                                    href={linkHref}
+                                    onClick={() => handleNavItemClick(item.href)}
                                     className={`
                                         text-gray-600 hover:text-blue-600 font-medium transition duration-300 
                                         relative group py-2
@@ -323,7 +334,7 @@ const Navbar = () => {
                         {isLoggedIn && (
                             // Mobile: Bell icon
                             <button
-                                onClick={() => alert('Mobile Notification Overlay Triggered')} 
+                                onClick={() => alert('Mobile Notification Overlay Triggered')}
                                 className="relative p-1 text-gray-600 hover:text-blue-600 transition-colors mr-3"
                                 aria-label="Notifications"
                             >
@@ -350,7 +361,7 @@ const Navbar = () => {
                 `}
             >
                 <div className="flex flex-col space-y-1 px-4 pt-2 pb-3">
-                    
+
                     {/* Logged in User Info for Mobile */}
                     {isLoggedIn && (
                         <div className="flex items-center space-x-3 mb-4 p-2 bg-gray-50 rounded-lg">
@@ -367,10 +378,10 @@ const Navbar = () => {
                         let linkHref = item.href;
 
                         if (item.name === 'Dashboard' && isLoggedIn) {
-                            linkHref = DASHBOARD_BASE_PATHS[0] || '/dashboard'; 
+                            linkHref = DASHBOARD_BASE_PATHS[0] || '/dashboard';
                         } else if (isUserLoggedIn(pathname) && item.href.startsWith('#')) {
                             // Fix for mobile menu as well
-                            linkHref = '/' + item.href; 
+                            linkHref = '/' + item.href;
                         }
 
                         return (
@@ -390,7 +401,7 @@ const Navbar = () => {
                             </Link>
                         );
                     })}
-                    
+
                     {isLoggedIn ? (
                         <Link href={DASHBOARD_BASE_PATHS[0] || '/dashboard'} onClick={() => setIsOpen(false)}>
                             <button className={`mt-4 w-full px-5 py-2 bg-blue-600 text-white font-medium rounded-lg 
@@ -399,12 +410,12 @@ const Navbar = () => {
                             </button>
                         </Link>
                     ) : (
-                           <Link href="/login" onClick={() => setIsOpen(false)}>
-                                <button className={`mt-4 w-full px-5 py-2 bg-blue-600 text-white font-medium rounded-lg 
+                        <Link href="/login" onClick={() => setIsOpen(false)}>
+                            <button className={`mt-4 w-full px-5 py-2 bg-blue-600 text-white font-medium rounded-lg 
                                 hover:bg-blue-700 transition duration-300 shadow-md`}>
                                 Get Started
-                                </button>
-                            </Link>
+                            </button>
+                        </Link>
                     )}
                 </div>
             </div>
