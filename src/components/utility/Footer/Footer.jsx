@@ -21,23 +21,23 @@ const Footer = () => {
         { name: 'Home', href: '/' },
         { name: 'Sign Up', href: '/signup' },
         { name: 'Login', href: '/login' },
-        { name: 'Contact Us', href: '/contact' },
+        { name: 'Contact Us', href: '/#contact-us' },
       ],
     },
     {
       title: 'Legal',
       links: [
-        { name: 'Terms of Service', href: '/terms' },
-        { name: 'Privacy Policy', href: '/privacy' },
-        { name: 'Compliance', href: '/compliance' },
+        { name: 'Terms of Service', href: '/' },
+        { name: 'Privacy Policy', href: '/' },
+        { name: 'Compliance', href: '/' },
       ],
     },
     {
       title: 'Support',
       links: [
-        { name: 'Help Center', href: '/help' },
-        { name: 'FAQs', href: '/faq' },
-        { name: 'Contact Support', href: '/support' },
+        { name: 'Help Center', href: '/' },
+        { name: 'FAQs', href: '/#faqs-section' },
+        { name: 'Contact Support', href: '/' },
       ],
     },
   ];
